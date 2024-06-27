@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>usuarios</title>
+</head>
+<body>
+    <br>
+    <div class="row">
+        <h1>Listado de usuarios</h1>
+    </div>
+    <button type="button">
+        <a href="{% url 'usuariosAdd' %}">Agregar</a>
+    </button>
+    <div id="mensajes">
+        {% if mensaje %}
+            {{mensaje}}
+        {% endif %}
+    </div>
+    <table>
+        {% if usuarios %}
+            <th>Rut</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Eliminar</th>
+            <th>Modificar</th>
+            {% for x in usuarios %}
+                <tr>
+                    <td>{{  x.rut   }}</td>
+                    <td>{{  x.nombre   }}</td>
+                    <td>{{  x.apellido_paterno   }}</td>
+                    
+                </tr>    
+            {% endfor %}
+        {% endif %}
+    </table>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('mensajes').delay(2000).fadeOut("slow");
+        });
+    </script>
+</body>
+
+</html>

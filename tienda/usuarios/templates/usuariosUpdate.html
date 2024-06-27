@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>usuarios</title>
+</head>
+
+<body>
+    <br>
+
+    <div style="text-align: center;">
+
+        {%  if Usuario   %}
+                <h1>Formulario Editar</h1>
+
+                <form action="{%  url 'usuariosUpdate'  %}" method="post">
+                    {% csrf_token %} 
+                    <pre>Rut: <input type="text" name="rut" value="{{Usuario.rut}}"> </pre>
+                    <pre>Nombre: <input type="text" name="nombre" value="{{Usuario.nombre}}"> </pre>
+                    <pre>Apellido P: <input type="text" name="paterno" value="{{Usuario.apellido_paterno}}"> </pre>
+                    <pre>Apellido M: <input type="text" name="materno" value="{{Usuario.apellido_materno}}"> </pre>
+                    <pre>Fec. Nac: <input type="date" name="fechaNac" value="{{Usuario.fecha_nacimiento|date:'Y-m-d'}}"> </pre>
+                    <pre>Género:
+                        <select name="genero">
+                            {% for genero in generos %}
+                                {% if genero.genero == Usuario.id_genero.genero %}
+                                    <option value="{{ genero.id_genero }}" selected>{{ genero.genero }}</option>  
+                                {% else %}
+                                    <option value="{{ genero.id_genero }}" >{{ genero.genero }}</option>  
+                                {% endif %}   
+                            {% endfor %}
+                        </select></pre>
+            
+                    <pre>Celular: <input type="text" name="telefono" value="{{Usuario.telefono}}"> </pre>
+                    <pre>Email: <input type="mail" name="email" value="{{Usuario.email}}"> </pre>
+                    <pre>Dirección: <input type="text" name="direccion" value="{{Usuario.direccion}}"> </pre>
+            
+                    <input type="submit" name="opcion" value="Actualizar"> 
+            
+                </form> <br><br>
+        {%  endif   %}
+    </div>
+
+    <div id="mensajes">
+        {% if mensaje %}
+        {{mensaje}}
+        {% endif %}
+    </div>
+
+    <br><br>
+            <a href="{%  url 'crud'  %}">Volver</a>
+    <br><br><br>
+    
+</body>
+
+</html>
